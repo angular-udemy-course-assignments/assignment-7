@@ -23,9 +23,15 @@
                  formControlName="projectName"
                  class="form-control"
                  id="projectName"
-                 required
                  placeholder="Enter Project name">
-          <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+          <span *ngIf="createForm.get('projectName').invalid && createForm.get('projectName').touched">
+            <small *ngIf="createForm.get('projectName').errors['required']"
+                   class="form-text text-muted">Name is required !
+            </small>
+            <small *ngIf="createForm.get('projectName').errors['nameIsForbidden']"
+                   class="form-text text-muted">This name is not allowed !
+            </small>
+          </span>
         </div>
         <div class="form-group">
           <label for="email">Email</label>
@@ -33,9 +39,10 @@
                  formControlName="email"
                  class="form-control"
                  id="email"
-                 email
-                 required
                  placeholder="Enter email">
+          <span *ngIf="createForm.get('email').invalid && createForm.get('email').touched">
+            Email is required !
+          </span>
         </div>
         <div class="select">
           <label for="projectStatus">Project Status</label>
@@ -51,7 +58,8 @@
         <button type="submit"
                 (click)="onCreate()"
                 class="btn btn-primary">
-          Create</button>
+          Create
+        </button>
       </form>
 
     </div>
